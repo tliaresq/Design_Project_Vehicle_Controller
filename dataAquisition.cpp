@@ -23,7 +23,7 @@ AnalogIn brakePressureOne(_);
 AnalogIn brakePressureTwo(_);
 
 float readThrottleOne() { //i think this should be u_int16 instead of float
-    float value = read....some analogue pin;
+    float value = throttleOne.read();
     if (value < lower limit || value > upper limit) {
         ThrottleOne = send error value; //throttle overtravel
     else {
@@ -32,7 +32,7 @@ float readThrottleOne() { //i think this should be u_int16 instead of float
 }
 
 float readThrottleTwo() { //i think this should be u_int16 instead of float
-    float value = read....some analogue pin;
+    float value = throttleTwo.read();
     if (value < lower limit || value > upper limit) {
         ThrottleOne = send error value; //throttle overtravel
     }
@@ -42,12 +42,31 @@ float readThrottleTwo() { //i think this should be u_int16 instead of float
 }
 
 float readBrakePressureOne() {
-    float value = read....some analogue pin;
+    float value = brakePressureOne.read();
     if (value < min value) {
         return 0;
+    }
+    else if (value > max value) {
+        return max value;
     }
     else {
         return value
     }
+}
 
+float readBrakePressureTwo() {
+    float value = brakePressureTwo.read();
+    if (value < min value) {
+        return 0;
+    }
+    else if (value > max value) {
+        return max value;
+    }
+    else {
+        return value
+    }
+}
+
+float readSteeringPosition() {
+    return value = steeringPosition.read() - calibrationReading;
 }

@@ -1,0 +1,40 @@
+#include "mbed.h"
+
+AnalogIn throttleOne(_); //define pin input
+
+int moving_average = 10; //arbitrary value for filter size
+
+float throttleOne[moving_average]; //create array the size of the moving average filter
+
+float readThrottleOne() { //i think this should be u_int16 instead of float
+    float value = throttleOne.read();
+    if (value < lower limit || value > upper limit) { //need to check rules what the limits/thresholds are
+        ThrottleOne = send error value; //throttle overtravel (I think)
+    else {
+        throttleOne = value;
+    }
+    return throttleOne;
+}
+
+//fill each position of array with one sensor reading
+void fillThrottleArray(float throttleOne) {
+	for (int i = 1; i < moving_average; i < 1) {
+		throttleOne[i] = throttleOne[i-1];
+	}
+	throttle[moving_average - 1] = throttleOne.read(); //final value filled manually
+}
+
+float averageThrottleOne() { //call this function to in VEHICLE LOGIC CLASS TO GET VALUE
+	float sum = 0
+	for (int i = 0; i < moving_average; i++) {
+		sum = sum + throttleOne[i];
+	}
+	if moving_average != 0 {
+		throttleReading = sum/moving_average;
+	}
+	else {
+		throttleReading = error??? //what goes here?
+	}
+	return averageThrottleOne;
+}
+
